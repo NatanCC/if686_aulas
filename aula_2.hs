@@ -18,3 +18,20 @@ digits :: String -> String
 digits [] = []
 digits (x:xs) | (x >= '0') && (x <= '9') = (x:digits xs)
 			| otherwise = digits xs
+
+
+quickSort :: [Int] -> [Int]
+quickSort [] = []
+--quickSort [x] = [x]
+quickSort (a:as) = (leftSplit (as) a)++[a]++(rightSplit (as) a)
+
+
+leftSplit :: [Int] -> Int -> [Int]
+leftSplit [] x = []
+leftSplit (a:as) x | a < x = quickSort(a: (leftSplit as x))
+                    | otherwise = quickSort(leftSplit as x)
+
+rightSplit :: [Int] -> Int -> [Int]
+rightSplit [] x = []
+rightSplit (a:as) x | a > x = quickSort (a: (rightSplit as x))
+                    | otherwise = quickSort (rightSplit as x)
